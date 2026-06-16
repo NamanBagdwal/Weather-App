@@ -1,15 +1,12 @@
 import React from 'react';
 
 const Forecast = ({ data }) => {
-  // OpenWeather API ka forecast data '.list' key ke andar hota hai
+ 
   const forecastList = data?.list || (Array.isArray(data) ? data : []);
 
   if (forecastList.length === 0) return null;
-
-  // Har din ka sirf ek static data point nikalne ke liye filter lagaya (12:00 PM ka weather)
+  
   const dailyForecast = forecastList.filter((item) => item.dt_txt?.includes("12:00:00")).slice(0, 5);
-
-  // Agar 12:00 PM ka block na mile (e.g. late night search par), toh seedhe har 8th entry utha lo
   const displayData = dailyForecast.length > 0 
     ? dailyForecast 
     : forecastList.filter((_, index) => index % 8 === 0).slice(0, 5);

@@ -17,8 +17,7 @@ export const getWeatherData = async (searchQuery) => {
     currentUrl = `https://api.openweathermap.org/data/2.5/weather?q=${encodeURIComponent(searchQuery.trim())}&units=metric&appid=${API_KEY}`;
     forecastUrl = `https://api.openweathermap.org/data/2.5/forecast?q=${encodeURIComponent(searchQuery.trim())}&units=metric&appid=${API_KEY}`;
   }
-
-  // Dono APIs ko ek saath call karenge taaki koi component crash na ho
+ 
   const [currentRes, forecastRes] = await Promise.all([
     fetch(currentUrl),
     fetch(forecastUrl)
@@ -31,7 +30,6 @@ export const getWeatherData = async (searchQuery) => {
   const currentData = await currentRes.json();
   const forecastData = await forecastRes.json();
 
-  // Ek combined object return karenge jisme dono components ka data ho
   return {
     current: currentData,
     forecast: forecastData

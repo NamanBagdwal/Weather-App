@@ -18,8 +18,7 @@ const Weather = () => {
       {error && <p className="weather-status-message" style={{ color: "#e53e3e" }}>{error}</p>}
 
       {weatherData && !loading && (
-        <div className="dashboard-content">
-          {/* Sahi data sub-objects pass kiye taaki components crash na hon */}
+        <div className="dashboard-content">         
           <CurrentWeather data={weatherData.current} />
           <Forecast data={weatherData.forecast} />
         </div>

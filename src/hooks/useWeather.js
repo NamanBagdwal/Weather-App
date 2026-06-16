@@ -9,9 +9,7 @@ export const useWeather = (initialCity = "") => {
     error: null,
   });
 
-  // ✅ Fixed: Empty dependency array [] so this only runs ONCE on mount
-  useEffect(() => {
-    // ✅ If initialCity was provided, skip geolocation detection
+  useEffect(() => {    
     if (initialCity) return;
 
     let isMounted = true;
@@ -45,9 +43,8 @@ export const useWeather = (initialCity = "") => {
     return () => {
       isMounted = false;
     };
-  }, []); // ✅ Empty array - runs only once on mount
+  }, []); 
 
-  // ✅ This effect runs whenever city changes to fetch weather data
   useEffect(() => {
     if (!city) return;
 
@@ -79,13 +76,12 @@ export const useWeather = (initialCity = "") => {
       isMounted = false;
       controller.abort();
     };
-  }, [city]); // ✅ Runs when city changes
+  }, [city]); 
 
-  // ✅ Fixed: Added basic validation for city name length
   const searchCity = useCallback((newCity) => {
     if (!newCity || newCity.trim() === "") return;
     const trimmed = newCity.trim();
-    if (trimmed.length < 2) return; // ✅ Avoid searching single characters
+    if (trimmed.length < 2) return;  
     setCity(trimmed);
   }, []);
 
